@@ -29,16 +29,23 @@
   }
 
   async function createCalendarEvent({ noteText, start, end }) {
-    const event = { summary: noteText, start: { dateTime: start }, end: { dateTime: end } };
+    const event = {
+      summary: noteText,
+      start: { dateTime: start },
+      end: { dateTime: end },
+    };
 
-    const res = await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
+    const res = await fetch(
+      "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(event),
       },
-      body: JSON.stringify(event)
-    });
+    );
 
     if (res.ok) {
       log(`Event created: ${noteText}`);
@@ -74,8 +81,13 @@
 
 <div class="p-4">
   <h3 class="text-lg font-bold mb-2">Google Calendar Integration</h3>
-  <p class="text-sm mb-4">Sign in with Google to add FigJam sticky notes as events.</p>
-  <button class="bg-blue-500 text-white px-4 py-2 rounded mb-4" on:click={signIn}>
+  <p class="text-sm mb-4">
+    Sign in with Google to add FigJam sticky notes as events.
+  </p>
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+    on:click={signIn}
+  >
     Sign in with Google
   </button>
 
@@ -84,6 +96,10 @@
     {#each logs as logItem}{logItem}{/each}
   </pre>
 
-  <Modal visible={modalVisible} noteText={currentNoteText} 
-         onConfirm={onModalConfirm} onCancel={onModalCancel}/>
-</div> 
+  <Modal
+    visible={modalVisible}
+    noteText={currentNoteText}
+    onConfirm={onModalConfirm}
+    onCancel={onModalCancel}
+  />
+</div>
