@@ -1,0 +1,9 @@
+{
+  "name": "FigJam → Google Calendar",
+  "id": "figjam-to-calendar",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "dist/index.html",
+  "editorType": ["figjam"],
+  "permissions": []
+} 
